@@ -3,8 +3,13 @@ const server = require("./src/server");
 const { conn } = require('./src/db.js');
 const PORT = 3001;
 
+const { countriesInfor }  = require("./src/controllers/getCountries") 
+
+
 conn.sync({ force: true }).then(() => {
-server.listen(PORT, () => {
+server.listen(PORT, async() => {
+  await countriesInfor();
+  
   console.log(`Server listening on port ${PORT}`);
 })
 }).catch(error => console.error(error))
